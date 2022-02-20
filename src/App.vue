@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container"></div>
+  <div class="main-container"> Roman Numeral Converter!</div>
   
 </template>
 
@@ -15,15 +15,19 @@ export default {
 </script>
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap');
+
 body, html {
   margin: 0%;
   padding: 0%;
-  
-}
-.main-container {
-  background-image: url(https://t3.ftcdn.net/jpg/03/82/09/26/360_F_382092696_zI4Jut4OObqIJmr2SjZJ47hZe839viak.jpg) no-repeat center center fixed;
+  background: url(https://thumbs.dreamstime.com/b/background-ancient-roman-mosaic-sevilla-detail-italica-near-41530772.jpg) no-repeat center center fixed;
   background-size: cover;
-  
+  font-family: Gideon Roman, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(90, 60, 53)
 }
 </style>
 

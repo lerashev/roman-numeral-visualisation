@@ -8,7 +8,6 @@
 export default {
   name: 'Expanded',
   props: {
-    msg: String
   }
 }
 </script>
