@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    
-  </body>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="data:image/png;base64,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"
+        />
+        <title><%= htmlWebpackPlugin.options.title %></title>
+    </head>
+    <body>
+        <noscript>
+            <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+        </noscript>
+        <div id="app"></div>
+    </body>
 </html>
