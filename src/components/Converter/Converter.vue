@@ -3,17 +3,26 @@
         <input :class="['input', 'arabic', !numArabic ? 'error' : '']" v-model="numArabic" @input="handleInputArabic($event)" type="number" min="1" step="1" />
         <button class="button-convert">CONVERT</button>
         <input :class="['input', 'roman', !numRoman ? 'error' : '']" v-model="numRoman" @input="handleInputRoman($event)" type="text" />
-        <!-- v-for line in romanBreakdown <div> letter : meaning -->
+        <div class="breakdown-container">
+            <div class="breakdown-line" v-for="line in numRomanBreakdown" :key="line">
+                <div class="arrow-body"></div>
+                <div class="arrow-tip"></div>
+                <span>{{ line }}</span>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import { romanToArabic, arabicToRoman } from "./helpers";
+
 export default {
     name: "Converter",
     data() {
         return {
             numArabic: 12,
             numRoman: "XII",
+            numRomanBreakdown: ["X : 10", "III : 3x1"],
         };
     },
     methods: {
@@ -24,14 +33,16 @@ export default {
             if (!value || value < min) {
                 value = "";
             }
-            this.numArabic = value;
             // convert to roman
+            this.numArabic = value;
+            this.numRoman = arabicToRoman(value);
         },
         handleInputRoman(event) {
             let value = event.target.value;
             // validate input
-            this.numRoman = value;
             // convert to arabic
+            this.numRoman = value;
+            this.numArabic = romanToArabic(value);
         },
     },
 };
@@ -61,7 +72,7 @@ export default {
     outline: none;
 }
 .input.error {
-    background: #ffcd38;
+    background: #ffcd387a;
 }
 
 .button-convert {
@@ -84,5 +95,44 @@ export default {
 .button-convert:active {
     filter: brightness(70%);
     cursor: pointer;
+}
+.breakdown-container {
+    align-self: flex-start;
+    padding-left: 2.5rem;
+}
+.breakdown-line {
+    --arrow-width: 3rem;
+    --arrow-thickness: 2px;
+    --line-thickness: 2px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    font-size: 20pt;
+}
+.breakdown-line::before {
+    position: absolute;
+    content: "";
+    top: -50%;
+    height: 100%;
+    border-left: var(--line-thickness) solid var(--text-color);
+}
+.arrow-body {
+    background: var(--text-color);
+    width: var(--arrow-width);
+    height: var(--arrow-thickness);
+    margin-right: 0.5rem;
+}
+.arrow-tip {
+    --arrow-tip-thickness: 2px;
+    --arrow-tip-size: 5px;
+    position: absolute;
+    left: calc(var(--arrow-width) - var(--arrow-tip-size) - 2px);
+    width: var(--arrow-tip-size);
+    height: var(--arrow-tip-size);
+    border: solid var(--text-color);
+    border-width: 0 var(--arrow-tip-thickness) var(--arrow-tip-thickness) 0;
+    transform: rotate(-45deg);
 }
 </style>
