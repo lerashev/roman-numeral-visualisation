@@ -10,11 +10,12 @@
                 <span>{{ line }}</span>
             </div>
         </div>
-        <!-- v-for line in romanBreakdown <div> letter : meaning -->
     </div>
 </template>
 
 <script>
+import { romanToArabic, arabicToRoman } from "./helpers";
+
 export default {
     name: "Converter",
     data() {
@@ -32,14 +33,16 @@ export default {
             if (!value || value < min) {
                 value = "";
             }
-            this.numArabic = value;
             // convert to roman
+            this.numArabic = value;
+            this.numRoman = arabicToRoman(value);
         },
         handleInputRoman(event) {
             let value = event.target.value;
             // validate input
-            this.numRoman = value;
             // convert to arabic
+            this.numRoman = value;
+            this.numArabic = romanToArabic(value);
         },
     },
 };
