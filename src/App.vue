@@ -26,16 +26,21 @@ html {
     margin: 0%;
     padding: 0%;
 }
+body,
+button,
+input {
+    font-family: Gideon Roman, sans-serif;
+}
 
 #app {
+    --text-color: rgba(53, 28, 28, 1);
     height: 100vh;
     width: 100vw;
     overflow: hidden;
     /* background: url(https://thumbs.dreamstime.com/b/background-ancient-roman-mosaic-sevilla-detail-italica-near-41530772.jpg) no-repeat center center fixed; */
     background-size: cover;
-    font-family: Gideon Roman, sans-serif;
-    color: rgba(53, 28, 28, 1);
     background: rgb(192, 192, 192);
+    color: var(--text-color);
 }
 
 #container {
