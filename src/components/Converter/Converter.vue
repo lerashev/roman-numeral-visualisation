@@ -38,7 +38,7 @@ export default {
         return {
             numArabic: 12,
             numRoman: "XII",
-            numRomanBreakdown: ["X : 10", "III : 3x1"],
+            numRomanBreakdown: ["X : 10", "II : 2*1"],
         };
     },
     methods: {
@@ -54,7 +54,10 @@ export default {
             this.numRoman = arabicToRoman(value);
         },
         handleInputRoman(event) {
-            let value = event.target.value;
+            let value = event.target.value
+                .toUpperCase()
+                .replace(/[^IVXLCDM]+/g, "");
+
             // validate input
             // convert to arabic
             this.numRoman = value;
