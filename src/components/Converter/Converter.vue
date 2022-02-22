@@ -76,12 +76,13 @@ export default {
 
 <style scoped>
 #converter {
-    --font-size: ;
     --bg-color: rgba(242, 247, 249, 0.8);
     display: flex;
     flex-direction: column;
     gap: 1rem;
     align-items: center;
+    align-self: start;
+    margin-top: 3rem;
 }
 
 .input {
@@ -92,7 +93,7 @@ export default {
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px 0px;
-    font-size: 20pt;
+    font-size: calc(var(--base-font-size) * 1.5);
 }
 .input:focus {
     outline: none;
@@ -110,7 +111,7 @@ export default {
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50%;
-    font-size: 12pt;
+    font-size: 1rem;
     font-weight: bold;
     transition: all 0.2s linear;
 }
@@ -135,7 +136,7 @@ export default {
     flex-direction: row;
     align-items: center;
     justify-content: start;
-    font-size: 20pt;
+    font-size: var(--base-font-size);
 }
 .breakdown-line::before {
     position: absolute;
@@ -160,5 +161,14 @@ export default {
     border: solid var(--text-color);
     border-width: 0 var(--arrow-tip-thickness) var(--arrow-tip-thickness) 0;
     transform: rotate(-45deg);
+}
+
+@media (max-width: 500px) {
+    .input {
+        font-size: 5vw;
+    }
+    .button-convert {
+        font-size: 3vw;
+    }
 }
 </style>
