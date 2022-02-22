@@ -1,10 +1,26 @@
 <template>
     <div id="converter">
-        <input :class="['input', 'arabic', !numArabic ? 'error' : '']" v-model="numArabic" @input="handleInputArabic($event)" type="number" min="1" step="1" />
+        <input
+            :class="['input', 'arabic', !numArabic ? 'error' : '']"
+            v-model="numArabic"
+            @input="handleInputArabic($event)"
+            type="number"
+            min="1"
+            step="1"
+        />
         <button class="button-convert">CONVERT</button>
-        <input :class="['input', 'roman', !numRoman ? 'error' : '']" v-model="numRoman" @input="handleInputRoman($event)" type="text" />
+        <input
+            :class="['input', 'roman', !numRoman ? 'error' : '']"
+            v-model="numRoman"
+            @input="handleInputRoman($event)"
+            type="text"
+        />
         <div class="breakdown-container">
-            <div class="breakdown-line" v-for="line in numRomanBreakdown" :key="line">
+            <div
+                class="breakdown-line"
+                v-for="line in numRomanBreakdown"
+                :key="line"
+            >
                 <div class="arrow-body"></div>
                 <div class="arrow-tip"></div>
                 <span>{{ line }}</span>
