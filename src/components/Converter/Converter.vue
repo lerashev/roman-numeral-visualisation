@@ -7,6 +7,7 @@
             type="number"
             min="1"
             step="1"
+            ref="arabic"
         />
         <button class="button-convert">CONVERT</button>
         <input
@@ -14,6 +15,7 @@
             v-model="numRoman"
             @input="handleInputRoman($event)"
             type="text"
+            ref="roman"
         />
         <div class="breakdown-container">
             <div
@@ -36,9 +38,9 @@ export default {
     name: "Converter",
     data() {
         return {
-            numArabic: 12,
-            numRoman: "XII",
-            numRomanBreakdown: ["X : 10", "II : 2*1"],
+            numArabic: 0,
+            numRoman: "",
+            numRomanBreakdown: [],
         };
     },
     methods: {
@@ -51,18 +53,23 @@ export default {
             }
             // convert to roman
             this.numArabic = value;
-            this.numRoman = arabicToRoman(value);
+            const { romanOutput, romanBreakdown } = arabicToRoman(value);
+            this.numRoman = romanOutput;
+            this.numRomanBreakdown = romanBreakdown;
         },
         handleInputRoman(event) {
             let value = event.target.value
                 .toUpperCase()
-                .replace(/[^IVXLCDM]+/g, "");
-
-            // validate input
-            // convert to arabic
+                .replace(/[^IVXLCDM]+/g, ""); // convert to arabic
             this.numRoman = value;
-            this.numArabic = romanToArabic(value);
+            const { arabicOutput, romanBreakdown } = romanToArabic(value);
+            this.numArabic = arabicOutput;
+            this.numRomanBreakdown = romanBreakdown;
         },
+    },
+    mounted() {
+        this.handleInputArabic({ target: { value: 2022 } });
+        this.$refs.roman.focus();
     },
 };
 </script>

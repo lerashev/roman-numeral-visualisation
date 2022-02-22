@@ -1,9 +1,10 @@
 export const arabicToRoman = (arabicInput) => {
-    let romanSymbols = {
+    const romanSymbols = {
         M: 1000,
         CM: 900,
         D: 500,
         CD: 400,
+        C: 100,
         XC: 90,
         L: 50,
         XL: 40,
@@ -15,19 +16,27 @@ export const arabicToRoman = (arabicInput) => {
     };
 
     let romanOutput = "";
+    const seen = new Set();
+    const romanBreakdown = [];
 
     for (let romanSymbol in romanSymbols) {
         const arabicValue = romanSymbols[romanSymbol];
         while (arabicInput >= arabicValue) {
             romanOutput += romanSymbol;
             arabicInput -= romanSymbols[romanSymbol];
+            if (!seen.has(romanSymbol)) {
+                seen.add(romanSymbol);
+                romanBreakdown.push(
+                    `${romanSymbol} : ${romanSymbols[romanSymbol]}`
+                );
+            }
         }
     }
-    return romanOutput;
+    return { romanOutput, romanBreakdown };
 };
 
 export const romanToArabic = (romanInput) => {
-    let arabicNumbers = {
+    const arabicNumbers = {
         I: 1,
         V: 5,
         X: 10,
@@ -38,20 +47,32 @@ export const romanToArabic = (romanInput) => {
     };
 
     let arabicOutput = 0;
+    const seen = new Set();
+    const romanBreakdown = [];
 
     for (let i = 0; i < romanInput.length; i++) {
         const char = romanInput[i];
         const charNext = romanInput[i + 1];
         const numeral = arabicNumbers[char];
         const numeralNext = arabicNumbers[charNext];
+        let romanNumeral;
+        let arabicValue;
 
         if (numeral < numeralNext) {
-            arabicOutput += numeralNext - numeral;
+            romanNumeral = char + charNext;
+            arabicValue = numeralNext - numeral;
+            arabicOutput += arabicValue;
             i++;
         } else {
-            arabicOutput += numeral;
+            romanNumeral = char;
+            arabicValue = numeral;
+            arabicOutput += arabicValue;
+        }
+        if (!seen.has(romanNumeral)) {
+            seen.add(romanNumeral);
+            romanBreakdown.push(`${romanNumeral} : ${arabicValue}`);
         }
     }
 
-    return arabicOutput;
+    return { arabicOutput, romanBreakdown };
 };
