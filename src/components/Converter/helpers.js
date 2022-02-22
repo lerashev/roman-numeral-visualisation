@@ -1,7 +1,5 @@
-export const arabicToRoman = (arabic) => {
-    let result = "";
-    //console.log(arabic);
-    let romanValues = {
+export const arabicToRoman = (arabicInput) => {
+    let romanSymbols = {
         M: 1000,
         CM: 900,
         D: 500,
@@ -16,18 +14,19 @@ export const arabicToRoman = (arabic) => {
         I: 1,
     };
 
-    for (let values in romanValues) {
-        while (arabic >= romanValues[values]) {
-            result += values;
-            arabic -= romanValues[values];
+    let romanOutput = "";
+
+    for (let romanSymbol in romanSymbols) {
+        const arabicValue = romanSymbols[romanSymbol];
+        while (arabicInput >= arabicValue) {
+            romanOutput += romanSymbol;
+            arabicInput -= romanSymbols[romanSymbol];
         }
     }
-    return result;
+    return romanOutput;
 };
 
-arabicToRoman();
-
-const romanToArabic = (roman) => {
+export const romanToArabic = (romanInput) => {
     let arabicNumbers = {
         I: 1,
         V: 5,
@@ -38,22 +37,21 @@ const romanToArabic = (roman) => {
         M: 1000,
     };
 
-    let arabicValue = 0;
+    let arabicOutput = 0;
 
-    for (let i = 0; i < roman.length; i++) {
-        const numeral = arabicNumbers[roman[i]];
-        const numeralNext = arabicNumbers[roman[i + 1]];
-        console.log(numeral, numeralNext);
+    for (let i = 0; i < romanInput.length; i++) {
+        const char = romanInput[i];
+        const charNext = romanInput[i + 1];
+        const numeral = arabicNumbers[char];
+        const numeralNext = arabicNumbers[charNext];
 
         if (numeral < numeralNext) {
-            arabicValue += numeralNext - numeral;
+            arabicOutput += numeralNext - numeral;
             i++;
         } else {
-            arabicValue += numeral;
+            arabicOutput += numeral;
         }
     }
 
-    return arabicValue;
+    return arabicOutput;
 };
-
-romanToArabic();

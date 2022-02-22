@@ -60,8 +60,6 @@ export default {
             this.numRoman = value;
             this.numArabic = romanToArabic(value);
         },
-        arabicToRoman,
-        romanToArabic,
     },
 };
 </script>
