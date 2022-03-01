@@ -96,7 +96,6 @@ export default {
     align-self: start;
     margin-top: 3rem;
 }
-
 .input {
     padding: 0.5rem;
     text-align: center;
@@ -113,7 +112,6 @@ export default {
 .input.error {
     background: #ffcd387a;
 }
-
 img {
     mix-blend-mode: multiply;
     border-radius: 50%;

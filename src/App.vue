@@ -31,7 +31,6 @@ button,
 input {
     font-family: Gideon Roman, sans-serif;
 }
-
 #app {
     --base-font-size: clamp(1vw, 1.5rem, 5vh);
     --text-color: rgba(53, 28, 28, 1);
@@ -42,7 +41,6 @@ input {
     background: rgb(192, 192, 192);
     color: var(--text-color);
 }
-
 #container {
     background: rgba(255, 255, 255, 0.3);
     height: 100%;
