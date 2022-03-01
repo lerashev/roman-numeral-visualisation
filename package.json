@@ -1,6 +1,7 @@
 {
-    "name": "roman-numeral-converter",
+    "name": "roman-numeral-visualisation",
     "version": "0.1.0",
+    "homepage": "http://lerashev.github.io/roman-numeral-visualisation",
     "private": true,
     "scripts": {
         "start": "vue-cli-service serve",
