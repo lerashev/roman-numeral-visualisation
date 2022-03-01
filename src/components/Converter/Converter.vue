@@ -119,7 +119,7 @@ export default {
     box-sizing: border-box;
     box-shadow: var(--box-shadow);
     border-radius: var(--border-radius);
-    font-size: calc(var(--base-font-size) * 1.3);
+    font-size: calc(var(--base-font-size) * 1.1);
 }
 .input:focus {
     outline: none;
