@@ -31,20 +31,18 @@ button,
 input {
     font-family: Gideon Roman, sans-serif;
 }
-
 #app {
+    --base-font-size: clamp(1vw, 1.5rem, 5vh);
     --text-color: rgba(53, 28, 28, 1);
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    /* background: url(https://thumbs.dreamstime.com/b/background-ancient-roman-mosaic-sevilla-detail-italica-near-41530772.jpg) no-repeat center center fixed; */
     background-size: cover;
     background: rgb(192, 192, 192);
     color: var(--text-color);
 }
-
 #container {
-    background: rgba(255, 255, 255, 0.3); /* mask for background-image */
+    background: rgba(255, 255, 255, 0.3);
     height: 100%;
     width: 100%;
     display: grid;

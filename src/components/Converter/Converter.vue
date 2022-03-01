@@ -9,7 +9,14 @@
             step="1"
             ref="arabic"
         />
-        <button class="button-convert">CONVERT</button>
+
+        <img
+            class="image"
+            @click="getRandomNumber()"
+            src="https://t4.ftcdn.net/jpg/03/05/38/61/360_F_305386149_Vua0CUMffWVrWqehdR91jur6CY3E4xmP.jpg"
+            alt=""
+        />
+
         <input
             :class="['input', 'roman', !numRoman ? 'error' : '']"
             v-model="numRoman"
@@ -60,11 +67,16 @@ export default {
         handleInputRoman(event) {
             let value = event.target.value
                 .toUpperCase()
-                .replace(/[^IVXLCDM]+/g, ""); // convert to arabic
+                .replace(/[^IVXLCDM]+/g, "");
+            // convert to arabic
             this.numRoman = value;
             const { arabicOutput, romanBreakdown } = romanToArabic(value);
             this.numArabic = arabicOutput;
             this.numRomanBreakdown = romanBreakdown;
+        },
+        getRandomNumber() {
+            const randomArabic = Math.floor(Math.random() * 1000);
+            this.handleInputArabic({ target: { value: randomArabic } });
         },
     },
     mounted() {
@@ -76,23 +88,23 @@ export default {
 
 <style scoped>
 #converter {
-    --font-size: ;
     --bg-color: rgba(242, 247, 249, 0.8);
     display: flex;
     flex-direction: column;
     gap: 1rem;
     align-items: center;
+    align-self: start;
+    margin-top: 3rem;
 }
-
 .input {
     padding: 0.5rem;
     text-align: center;
     background: var(--bg-color);
-    border: 1px solid var(--bg-color); /* bg-color or text-color */
+    border: 1px solid var(--bg-color);
     box-sizing: border-box;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px 0px;
-    font-size: 20pt;
+    font-size: calc(var(--base-font-size) * 1.3);
 }
 .input:focus {
     outline: none;
@@ -100,26 +112,10 @@ export default {
 .input.error {
     background: #ffcd387a;
 }
-
-.button-convert {
-    --btn-size: 6em;
-    height: var(--btn-size);
-    width: var(--btn-size);
-    background: var(--bg-color);
-    border: 1px solid var(--bg-color); /* bg-color or text-color */
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+img {
+    mix-blend-mode: multiply;
     border-radius: 50%;
-    font-size: 12pt;
-    font-weight: bold;
-    transition: all 0.2s linear;
-}
-.button-convert:hover {
-    filter: brightness(85%);
-    cursor: pointer;
-}
-.button-convert:active {
-    filter: brightness(70%);
+    width: clamp(40px, 30%, 80px);
     cursor: pointer;
 }
 .breakdown-container {
@@ -135,7 +131,7 @@ export default {
     flex-direction: row;
     align-items: center;
     justify-content: start;
-    font-size: 20pt;
+    font-size: var(--base-font-size);
 }
 .breakdown-line::before {
     position: absolute;
