@@ -10,12 +10,24 @@
             ref="arabic"
         />
 
-        <img
-            class="image"
-            @click="getRandomNumber()"
-            src="https://t4.ftcdn.net/jpg/03/05/38/61/360_F_305386149_Vua0CUMffWVrWqehdR91jur6CY3E4xmP.jpg"
-            alt=""
-        />
+        <div
+            class="btn-container"
+            @mouseover="showTooltip = true"
+            @mouseout="showTooltip = false"
+        >
+            <img
+                class="btn"
+                @click="getRandomNumber()"
+                src="https://t4.ftcdn.net/jpg/03/05/38/61/360_F_305386149_Vua0CUMffWVrWqehdR91jur6CY3E4xmP.jpg"
+                alt=""
+            />
+            <div
+                :class="['btn-tooltip', showTooltip ? 'show' : '']"
+                @click="getRandomNumber()"
+            >
+                click me
+            </div>
+        </div>
 
         <input
             :class="['input', 'roman', !numRoman ? 'error' : '']"
@@ -48,6 +60,7 @@ export default {
             numArabic: 0,
             numRoman: "",
             numRomanBreakdown: [],
+            showTooltip: false,
         };
     },
     methods: {
@@ -89,12 +102,14 @@ export default {
 <style scoped>
 #converter {
     --bg-color: rgba(242, 247, 249, 0.8);
+    --border-radius: 10px 0px;
+    --box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     gap: 1rem;
     align-items: center;
     align-self: start;
-    margin-top: 3rem;
+    margin-top: max(3rem, 10vh);
 }
 .input {
     padding: 0.5rem;
@@ -102,8 +117,8 @@ export default {
     background: var(--bg-color);
     border: 1px solid var(--bg-color);
     box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px 0px;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
     font-size: calc(var(--base-font-size) * 1.3);
 }
 .input:focus {
@@ -112,12 +127,38 @@ export default {
 .input.error {
     background: #ffcd387a;
 }
-img {
+.btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min-content;
+    position: relative;
+    user-select: none;
+}
+.btn {
     mix-blend-mode: multiply;
-    border-radius: 50%;
-    width: clamp(40px, 30%, 80px);
+    width: clamp(40px, 30vh, 80px);
     cursor: pointer;
 }
+.btn-tooltip {
+    display: inline-block;
+    cursor: pointer;
+    height: 1rem;
+    width: max-content;
+    background: var(--bg-color);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    position: absolute;
+    padding: 0.5rem;
+    left: 5rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    visibility: hidden;
+}
+.btn-tooltip.show {
+    visibility: visible;
+}
+
 .breakdown-container {
     align-self: flex-start;
     padding-left: 2.5rem;
